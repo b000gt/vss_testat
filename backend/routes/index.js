@@ -2,19 +2,24 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/counter/:action', function(req, res, next) {
-  switch(req.params.action){
-    case 'increase':
-      pc.Points += pc.getNextLevel();
-      break;
-    case 'decrease':
-      pc.Points -= pc.getNextLevel();
-      break;
-    default:
-      break;
-  }
+router.get('/counter/increase/:amount', function(req, res, next) {
+  global.pc.increase(req.params.amount);
   res.header("Access-Control-Allow-Origin", "*");
-  res.send({ points: pc.getCounter(), nextLevel: pc.getNextLevel()});
+  res.send({ points: pc.getCounter()});
+});
+router.get('/counter', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send({ points: pc.getCounter()});
+});
+
+router.get('/clickables', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send({ clickables: clickableCollection});
+});
+router.get('/clickables/add/:modifier', function(req, res, next) {
+  clickableCollection.push(new Clickable(req.params.modifier));
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send({ clickables: clickableCollection});
 });
 
 module.exports = router;
@@ -23,17 +28,22 @@ class PointCounter{
   constructor() {
     this.Points = 0;
   }
-  getNextLevel(){
-    let tmpPoins = this.Points;
-    let levelCounter = 1;
-    while (tmpPoins > 10){
-      tmpPoins /= 10;
-      levelCounter ++;
-    }
-    return levelCounter;
-  }
   getCounter(){
     return this.Points;
   }
+  increase(amount){
+    this.Points = parseInt(amount) + this.Points;
+  }
+}
+
+class Clickable{
+  constructor(modifier) {
+    this.Modifier = parseInt(modifier);
+  }
+  getModifier(){
+    return this.Modifier;
+  }
+
 }
 global.pc = new PointCounter();
+global.clickableCollection = [new Clickable(1)];

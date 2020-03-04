@@ -1,0 +1,21 @@
+.clickable{
+    width: 100px;
+    height: 100px;
+    background: lightblue;
+    margin: 40px;
+
+}
+.point-counter{
+    position: absolute;
+    top: 0;
+}
+#addClicker{
+    width: 100px;
+    height: 100px;
+    background: red;
+    margin: 40px;
+}
+#main{
+    display: flex;
+    flex-wrap: wrap;
+}
