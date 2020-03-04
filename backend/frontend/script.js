@@ -38,6 +38,15 @@ async function updateAddClickable(){
     });
 }
 
+async function backgroundClicker(){
+    setTimeout(async function(){
+        for(clickable of document.getElementsByClassName("clickable")){
+            await fetch('http://localhost:8080/counter/increase/'+clickable.getAttribute("modifier"));
+            updatePoints();
+        }
+        backgroundClicker();
+    }, Math.floor((Math.random() * 1500) + 500));
+}
 class Clickable{
     constructor(modifier) {
         this.Modifier = parseInt(modifier);
@@ -53,3 +62,4 @@ class Clickable{
 updatePoints();
 updateClickables();
 updateAddClickable();
+backgroundClicker();

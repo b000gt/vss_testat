@@ -1,21 +1,22 @@
-.clickable{
-    width: 100px;
-    height: 100px;
-    background: lightblue;
-    margin: 40px;
-
-}
 .point-counter{
     position: absolute;
     top: 0;
 }
 #addClicker{
-    width: 100px;
-    height: 100px;
+    width: calc(20vw - 10 * 10px);
+    height: calc(20vw - 10 * 10px);
     background: red;
-    margin: 40px;
+    margin: 10px;
 }
 #main{
     display: flex;
     flex-wrap: wrap;
+}
+.clickable{
+    width: calc(20vw - 10 * 10px);
+    height: calc(20vw - 10 * 10px);
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+    background: lightblue;
 }
