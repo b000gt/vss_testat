@@ -4,9 +4,24 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 
 var app = express();
+
+//db stuffs
+const db = require('./db');
+var port = 3000;
+app.get('/', (request, response) => {
+  response.json({ info: 'Simple JSON response' });
+})
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`);
+})
+
+app.get('/users', db.getUsers)
+app.get('/users/:id', db.getUserById)
+app.post('/users', db.createUser)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
