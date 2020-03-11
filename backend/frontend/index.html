@@ -6,11 +6,41 @@
     <title>Clicker</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="point-counter"><span id="points">...</span></div>
-    <div id="addClicker">+</div>
-    <div id="main">
+    <header>
+        <div class="points">8080<i class="fa fa-heart"></i></div>
+    </header>
+    <div class="board">
+        <div class="tile add">
+            <span class="cost">
+                <span>
+                    <i class="fa fa-plus"></i>
+                    2000
+                </span>
+            </span>
+        </div>
+        <div class="tile face">
+            <img src="./images/p1.jpg">
+            <span class="modifier">2</span>
+        </div>
+        <div class="tile face">
+            <img src="./images/p2.jpg">
+            <span class="modifier">4</span>
+        </div>
+        <div class="tile face">
+            <img src="./images/p3.jpg">
+            <span class="modifier">8</span>
+        </div>
+        <div class="tile face">
+            <img src="./images/p4.jpg">
+            <span class="modifier">16</span>
+        </div>
+        <div class="tile face">
+            <img src="./images/p5.jpg">
+            <span class="modifier">32</span>
+        </div>
     </div>
 </body>
 <script type="text/javascript" src="./classes.js"></script>

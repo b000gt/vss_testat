@@ -1,22 +1,50 @@
-.point-counter{
+:root{
+    --tile-margin: 10px;
+    --tile-width: calc((95vw / 4) - 2.1 * var(--tile-margin));
+}
+body{
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    font-size: 40px;
+}
+header .points{
+    width: max-content;
+    margin: auto;
+}
+.board{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 95vw;
+}
+.tile{
+    width: var(--tile-width);
+    margin: var(--tile-margin);
+    height: var(--tile-width);
+    position: relative;
+}
+.tile.face img{
+    width: var(--tile-width);
+    height: var(--tile-width);
+    object-fit: cover;
+}
+.tile span{
     position: absolute;
     top: 0;
+    left: 0;
+    color: white;
 }
-#addClicker{
-    width: calc(20vw - 10 * 10px);
-    height: calc(20vw - 10 * 10px);
-    background: red;
-    margin: 10px;
+.tile.add span{
+    color: darkgray;
 }
-#main{
-    display: flex;
-    flex-wrap: wrap;
+.tile.add{
+    order: 999999999;
 }
-.clickable{
-    width: calc(20vw - 10 * 10px);
-    height: calc(20vw - 10 * 10px);
-    margin: 10px;
-    overflow: hidden;
+.tile.add .cost{
+    left: 50%;
+    top: 50%;
+}
+.tile.add .cost span{
     position: relative;
-    background: lightblue;
+    left: -50%;
+    top: -50%;
 }

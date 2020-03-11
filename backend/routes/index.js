@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/counter/increase/:amount', function(req, res, next) {
   global.pc.increase(req.params.amount);
   res.header("Access-Control-Allow-Origin", "*");
@@ -20,6 +19,9 @@ router.get('/clickables/add/:modifier', function(req, res, next) {
   clickableCollection.push(new Clickable(req.params.modifier));
   res.header("Access-Control-Allow-Origin", "*");
   res.send({ clickables: clickableCollection});
+});
+router.get('/', function(req, res, next){
+  res.send("HELLOOOOOOOOO");
 });
 
 module.exports = router;
