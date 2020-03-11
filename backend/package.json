@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start-old": "node ./bin/www",
+    "system1": "node ./bin/www --port 8084",
+    "system2": "node ./bin/www --port 8081",
+    "system3": "node ./bin/www --port 8082",
+    "system4": "node ./bin/www --port 8083",
+    "start": "npm run system1 & npm run system2 & npm run system3 & npm run system4"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

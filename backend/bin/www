@@ -11,8 +11,19 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
+let port = normalizePort(process.env.PORT || '8080');
+let portFollowing = false;
+process.argv.forEach(function (val, index, array) {
+  if(portFollowing){
+    portFollowing = false;
+    port = normalizePort(val);
+    console.log("Port: " + val);
 
-var port = normalizePort(process.env.PORT || '8080');
+  }
+  if(val.indexOf("--port") == 0){
+    portFollowing = true;
+  }
+});
 app.set('port', port);
 
 /**

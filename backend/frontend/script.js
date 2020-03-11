@@ -1,3 +1,24 @@
+var mainHtml = "";
+faces.forEach(function(obj){
+    console.log(obj);
+    mainHtml += obj.getHtml();
+});
+document.getElementById("main").innerHTML = mainHtml;
+
+function clickInBackground(){
+    setTimeout(function(){
+        points.increase(10);
+        console.log(points.getPoints()+"/"+nextCost.getNextCost());
+        if(points.getPoints() >= nextCost.getNextCost()){
+            document.getElementById("addClicker").style.visibility = "visible";
+        } else{
+            document.getElementById("addClicker").style.visibility = "hidden";
+        }
+        clickInBackground();
+    }, 1000);
+};
+clickInBackground();
+/*
 async function fetchPoints(){
     let counterObj = await fetch('http://localhost:8080/counter')
         .then(res => { return res.json() });
@@ -63,3 +84,4 @@ updatePoints();
 updateClickables();
 updateAddClickable();
 backgroundClicker();
+ */

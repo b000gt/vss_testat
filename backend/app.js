@@ -11,13 +11,6 @@ var app = express();
 
 //db stuffs
 const db = require('./db');
-var port = 3000;
-app.get('/', (request, response) => {
-  response.json({ info: 'Simple JSON response' });
-})
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`);
-})
 
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
