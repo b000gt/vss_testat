@@ -3,19 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var typeorm = require('typeorm');
+var EntitySchema = typeorm.EntitySchema;
 
 
 var indexRouter = require('./routes/index');
 
+typeorm.createConnection({
+  type: "postgres",
+  host: "localhost",
+  port: 5432,
+  username: "vss_user",
+  password: "123456789",
+  database: "happyface",
+  synchronize: false,
+  entities: [
+    new EntitySchema(require("./db/entity/Face")),
+    new EntitySchema(require("./db/entity/Clicks"))
+  ]
+}).catch(function(error) {
+  console.log("Error: ", error);
+});
+
+
 var app = express();
-
-//db stuffs
-const db = require('./db');
-
-app.get('/users', db.getUsers)
-app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

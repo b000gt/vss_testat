@@ -1,4 +1,5 @@
 var express = require('express');
+var faceOperations = require('../db/controller/FaceOperations');
 var router = express.Router();
 
 router.get('/counter/increase/:amount', function(req, res, next) {
@@ -22,6 +23,11 @@ router.get('/clickables/add/:modifier', function(req, res, next) {
 });
 router.get('/', function(req, res, next){
   res.send("HELLOOOOOOOOO");
+});
+
+router.get('/faces', async function(req, res, next) {
+  var myReturnValue = await faceOperations.getFaces();
+  res.send(JSON.stringify(myReturnValue));
 });
 
 module.exports = router;
