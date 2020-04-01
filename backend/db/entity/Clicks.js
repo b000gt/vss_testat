@@ -1,5 +1,5 @@
 module.exports = {
-    name: "clicks",
+    name: "total_clicks",
     columns: {
         id: {
             primary: true,

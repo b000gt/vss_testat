@@ -1,5 +1,6 @@
 var express = require('express');
 var faceOperations = require('../db/controller/FaceOperations');
+var clickOperations = require('../db/controller/ClickOperations');
 var router = express.Router();
 
 router.get('/counter/increase/:amount', function(req, res, next) {
@@ -38,7 +39,22 @@ router.post('/face', async function(req, res, next) {
     var myReturnValue = faceOperations.postFaces(req.body);
     res.send(myReturnValue);
   }
-})
+});
+
+router.get('/clicks', async function(req, res, next) {
+  var myReturnValue = await clickOperations.getClicks();
+  res.send(JSON.stringify(myReturnValue));
+});
+
+router.put('/clicks', async function(req, res, next) {
+  if (req.body.amount === ''){
+    res.status(403).send({message: 'No Amount Given'});
+  }
+  else {
+    clickOperations.updateClicks(req.body.amount);
+    res.send({yeet: 1234});
+  }
+});
 
 module.exports = router;
 
