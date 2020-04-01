@@ -8,6 +8,9 @@ to start nginx: /etc/init.d/nginx start
 to stop nginx:  /etc/init.d/nginx stop
 in folder backend: npm start
 
+https://www.howtoforge.com/tutorial/basic-http-authentication-with-nginx/
+https://luppeng.wordpress.com/2020/02/28/install-and-start-postgresql-on-alpine-linux/
+
 /etc/nginx/conf.d/default.conf
 
 upstream backend {
@@ -23,6 +26,8 @@ server {
 
   location / {
     proxy_pass http://backend;
+    auth_basic "Restricted";
+    auth_basic_user_file /home/vss_testat/backend/.htpasswd;
   }
 
   # You may need this to prevent return 404 recursion.
