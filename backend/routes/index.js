@@ -23,7 +23,7 @@ router.get('/clickables/add/:modifier', function(req, res, next) {
   res.send({ clickables: clickableCollection});
 });
 router.get('/', function(req, res, next){
-  res.send("HELLOOOOOOOOO");
+  res.send("Hello from :" + req.app.settings.port);
 });
 
 router.get('/faces', async function(req, res, next) {
