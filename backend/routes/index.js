@@ -30,6 +30,16 @@ router.get('/faces', async function(req, res, next) {
   res.send(JSON.stringify(myReturnValue));
 });
 
+router.post('/face', async function(req, res, next) {
+  if (req.body.name === '' || req.body.amount === ''){
+    res.status(403).send({message: 'No Name or Amount given'});
+  }
+  else {
+    var myReturnValue = faceOperations.postFaces(req.body);
+    res.send(myReturnValue);
+  }
+})
+
 module.exports = router;
 
 class PointCounter{

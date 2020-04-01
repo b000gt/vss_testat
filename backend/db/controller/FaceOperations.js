@@ -1,5 +1,4 @@
 var typeorm = require('typeorm');
-var face = require('../entity/Face');
 
 async function getFaces() {
     try {
@@ -13,5 +12,23 @@ async function getFaces() {
     }    
 }
 
+/*
+* wants obj {key: value} to save into db, make sure it has the same attributes as a Face entity
+*/
+async function postFaces(obj) {
+    
+    const faceRepository = typeorm.getConnection().getRepository("face");
+
+    const newFace = faceRepository.create();
+    newFace.name = obj.name;
+    newFace.amount = obj.amount;
+    faceRepository.save(newFace).then(function(savedPost) {
+        return 200;
+    }).catch(function(error) {
+        console.log("Error: ", error);
+        return error;
+    });
+}
 
 module.exports.getFaces = getFaces;
+module.exports.postFaces = postFaces;

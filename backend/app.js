@@ -6,7 +6,6 @@ var logger = require('morgan');
 var typeorm = require('typeorm');
 var EntitySchema = typeorm.EntitySchema;
 
-
 var indexRouter = require('./routes/index');
 
 typeorm.createConnection({
