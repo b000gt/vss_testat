@@ -1,18 +1,15 @@
-var typeorm = require('typeorm');
+const typeorm = require('typeorm');
+const fs = require('fs');
 
 async function getFaces() {
-    var faceRepository = typeorm.getConnection().getRepository("face");
-    var faces = await faceRepository.find();
+    const faceRepository = typeorm.getConnection().getRepository("face");
+    const faces = await faceRepository.find();
     console.log(faces);
     if(faces.length <= 0) {
         throw new Error('No faces found');
     }
     return faces;
 }
-
-async function getSingleFaceByName(faceName) {
-    
-} 
 
 /*
 * faceName = String, faceAmount = int
@@ -24,7 +21,12 @@ async function postFaces(faceName, faceAmount) {
     const newFace = faceRepository.create();
     newFace.name = faceName;
     newFace.amount = faceAmount;
-    return await faceRepository.save(newFace);
+    const result = await faceRepository.save(newFace);
+    fs.appendFile('textprotocol.txt', '[' + new Date().toUTCString() + '] Add new face ' + faceName + ' with value ' + faceAmount + ', \n', (err) => {
+        if (err) throw err;
+    });
+    return result;
+
 }
 
 module.exports.getFaces = getFaces;

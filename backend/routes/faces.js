@@ -1,7 +1,7 @@
-var express = require('express');
-var faceOperations = require('../db/controller/FaceOperations');
+const express = require('express');
+const faceOperations = require('../db/controller/FaceOperations');
 
-var router = express.Router();
+const router = express.Router();
 
 
 /* Idea: only the amount will be saved on the face repository, there will be a matching with name and the specified amount,
@@ -12,7 +12,7 @@ var router = express.Router();
 
 router.get('/', async function(req, res, next) {
   try {
-    var allFaces = await faceOperations.getFaces();
+    const allFaces = await faceOperations.getFaces();
     res.send(allFaces);
   } catch(e) {
     res.status(403).send({ message: e.message });
@@ -35,9 +35,7 @@ router.post('/', async function(req, res, next) {
     if (!name || !amount) {
       throw new Error('No Face or Amount given');
     }
-    var newFace = await faceOperations.postFaces(name, amount);
-    console.log(newFace);
-    console.log(JSON.stringify(newFace));
+    const newFace = await faceOperations.postFaces(name, amount);
     res.send(newFace);
 
   } catch (e) {
