@@ -1,6 +1,4 @@
 var express = require('express');
-var faceOperations = require('../db/controller/FaceOperations');
-var clickOperations = require('../db/controller/ClickOperations');
 var router = express.Router();
 
 router.get('/counter/increase/:amount', function(req, res, next) {
@@ -24,36 +22,6 @@ router.get('/clickables/add/:modifier', function(req, res, next) {
 });
 router.get('/', function(req, res, next){
   res.send("Hello from :" + req.app.settings.port);
-});
-
-router.get('/faces', async function(req, res, next) {
-  var myReturnValue = await faceOperations.getFaces();
-  res.send(JSON.stringify(myReturnValue));
-});
-
-router.post('/face', async function(req, res, next) {
-  if (req.body.name === '' || req.body.amount === ''){
-    res.status(403).send({message: 'No Name or Amount given'});
-  }
-  else {
-    var myReturnValue = faceOperations.postFaces(req.body);
-    res.send(myReturnValue);
-  }
-});
-
-router.get('/clicks', async function(req, res, next) {
-  var myReturnValue = await clickOperations.getClicks();
-  res.send(JSON.stringify(myReturnValue));
-});
-
-router.put('/clicks', async function(req, res, next) {
-  if (req.body.amount === ''){
-    res.status(403).send({message: 'No Amount Given'});
-  }
-  else {
-    clickOperations.updateClicks(req.body.amount);
-    res.send({yeet: 1234});
-  }
 });
 
 module.exports = router;

@@ -9,10 +9,6 @@ module.exports = {
         amount: {
             type: "bigint",
             default: 0
-        },
-        locked: {
-            type: "boolean",
-            default: true
         }
     }
 };

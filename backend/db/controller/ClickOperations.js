@@ -1,34 +1,25 @@
 var typeorm = require('typeorm');
-var Clicks = require('../entity/Clicks');
-const SEMESTER_COUNT = {id: 1};
+const SEMESTER_COUNT = 1; // since our application only ever allows 1 clicks repository per semester, we leave a constat value here
 
-/* since our application only ever allows 1 clicks repository per semester, we leave a constat value here*/
+
 async function getClicks() {
-    try {
-        var clicksRepository = typeorm.getConnection().getRepository("total_clicks");
-        var clicks = await clicksRepository.findOne(SEMESTER_COUNT);
-        console.log(clicks);
-        return clicks;
-    } catch(e) {
-        console.log("Error: ", e);
-        return undefined;
-    }    
+    var clicksRepository = typeorm.getConnection().getRepository("total_clicks");
+    var clicks = await clicksRepository.findOne({id: SEMESTER_COUNT});
+    console.log(clicks);
+    return clicks;
 }
 
 
 async function updateClicks(newAmount) {
     console.log(newAmount);
-    try {
-        await typeorm.getConnection()
+    var newClicks = await typeorm.getConnection()
         .createQueryBuilder()
         .update("total_clicks")
         .set({amount: () => "amount + " + newAmount})
-        .where("id = 1")
-        .execute();      
-    }
-    catch(e){
-        console.log("Error occured", e);
-    }
+        .where("id = :id", {id: SEMESTER_COUNT})
+        .execute();
+    newClicks = getClicks();
+    return newClicks;   
 }
 module.exports.getClicks = getClicks;
 module.exports.updateClicks = updateClicks;

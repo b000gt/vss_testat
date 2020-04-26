@@ -7,6 +7,8 @@ var typeorm = require('typeorm');
 var EntitySchema = typeorm.EntitySchema;
 
 var indexRouter = require('./routes/index');
+var faceRouter = require('./routes/faces');
+var clickRouter = require('./routes/clicks');
 
 typeorm.createConnection({
   type: "postgres",
@@ -15,12 +17,12 @@ typeorm.createConnection({
   username: "vss_user",
   password: "123456789",
   database: "happyface",
-  synchronize: false,
+  synchronize: true,
   entities: [
     new EntitySchema(require("./db/entity/Face")),
     new EntitySchema(require("./db/entity/Clicks"))
   ]
-}).catch(function(error) {
+}).then(console.log('Done Loading things')).catch(function(error) {
   console.log("Error: ", error);
 });
 
@@ -36,6 +38,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/faces', faceRouter);
+app.use('/clicks', clickRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

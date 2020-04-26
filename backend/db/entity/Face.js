@@ -9,11 +9,13 @@ module.exports = {
         name: {
             type: "varchar",
             length: 255,
-            nullable: false
+            nullable: false,
+            unique: true,
         },
         amount: {
             type: "int",
-            nullable: false
+            nullable: false,
+            unique: true,
         }
     }
 };

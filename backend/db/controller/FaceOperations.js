@@ -1,33 +1,30 @@
 var typeorm = require('typeorm');
 
 async function getFaces() {
-    try {
-        var faceRepository = typeorm.getConnection().getRepository("face");
-        var faces = await faceRepository.find();
-        console.log(faces);
-        return faces;
-    } catch(e) {
-        console.log("Error: ", e);
-        return undefined;
-    }    
+    var faceRepository = typeorm.getConnection().getRepository("face");
+    var faces = await faceRepository.find();
+    console.log(faces);
+    if(faces.length <= 0) {
+        throw new Error('No faces found');
+    }
+    return faces;
 }
 
+async function getSingleFaceByName(faceName) {
+    
+} 
+
 /*
-* wants obj {key: value} to save into db, make sure it has the same attributes as a Face entity
+* faceName = String, faceAmount = int
 */
-async function postFaces(obj) {
+async function postFaces(faceName, faceAmount) {
     
     const faceRepository = typeorm.getConnection().getRepository("face");
 
     const newFace = faceRepository.create();
-    newFace.name = obj.name;
-    newFace.amount = obj.amount;
-    faceRepository.save(newFace).then(function(savedPost) {
-        return 200;
-    }).catch(function(error) {
-        console.log("Error: ", error);
-        return error;
-    });
+    newFace.name = faceName;
+    newFace.amount = faceAmount;
+    return await faceRepository.save(newFace);
 }
 
 module.exports.getFaces = getFaces;
