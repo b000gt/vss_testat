@@ -18,11 +18,11 @@ async function updateClicks(newAmount) {
         .set({amount: () => "amount + " + newAmount})
         .where("id = :id", {id: SEMESTER_COUNT})
         .execute();
-    newClicks = getClicks();
+    const totalClicks = getClicks();
     fs.appendFile('textprotocol.txt', '[' + new Date().toUTCString() + '] Overwrite click counter, \n', (err) => {
         if (err) throw err;
     });
-    return newClicks;   
+    return totalClicks;   
 }
 module.exports.getClicks = getClicks;
 module.exports.updateClicks = updateClicks;

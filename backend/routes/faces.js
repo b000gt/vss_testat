@@ -26,16 +26,23 @@ router.post('/', async function(req, res, next) {
   try { 
     let name = null;
     let amount = null;
+    let price = null;
     if (req.body.name) {
       name = req.body.name.toString();
     }
     if (req.body.amount) {
       amount = parseInt(req.body.amount);
     }
-    if (!name || !amount) {
-      throw new Error('No Face or Amount given');
+    if (req.body.price) {
+      price = parseInt(req.body.price);
     }
-    const newFace = await faceOperations.postFaces(name, amount);
+    if (!name || !amount || !price) {
+      throw new Error('No Face, Price or Amount given');
+    }
+    if (price < 0) {
+      throw new Error('Negative numbers are not allowed');
+    }
+    const newFace = await faceOperations.postFaces(name, amount, price);
     res.send(newFace);
 
   } catch (e) {
