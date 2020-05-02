@@ -14,17 +14,18 @@ var indexRouter = require('./routes/index');
 var faceRouter = require('./routes/faces');
 var clickRouter = require('./routes/clicks');
 
+
 typeorm.createConnection({
   type: "postgres",
-  host: "localhost",
+  host: "postgres",   //localhost
   port: 5432,
   username: "vss_user",
   password: "123456789",
   database: "happyface",
   synchronize: true,
   entities: [
-    new EntitySchema(require("./db/entity/Face")),
-    new EntitySchema(require("./db/entity/Clicks"))
+    new EntitySchema(require("./db/entity/Face.js")),
+    new EntitySchema(require("./db/entity/Clicks.js"))
   ]
 }).then(console.log('Done Loading things')).catch(function(error) {
   console.log("Database Connection Error: ", error);

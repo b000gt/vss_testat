@@ -1,0 +1,25 @@
+version: '3.0'
+services:
+    nginx: 
+        image: nginx:1.17.10
+        ports:
+            - "80:80"
+        volumes: 
+            - ./nginx.conf:/etc/nginx/nginx.conf
+    backend:
+        build: ./backend/.
+        # ports: 
+        #     - "8081:8081"
+        #     - "8082:8082"
+        #     - "8083:8083"
+        #     - "8084:8084"
+        depends_on: 
+            - postgres
+    postgres:
+        image: postgres:12
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+        environment: 
+            POSTGRES_USER: vss_user
+            POSTGRES_PASSWORD: '123456789'
+            POSTGRES_DB: happyface
