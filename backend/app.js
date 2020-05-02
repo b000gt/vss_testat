@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 var typeorm = require('typeorm');
 var EntitySchema = typeorm.EntitySchema;
 
@@ -23,7 +24,7 @@ typeorm.createConnection({
     new EntitySchema(require("./db/entity/Clicks"))
   ]
 }).then(console.log('Done Loading things')).catch(function(error) {
-  console.log("Error: ", error);
+  console.log("Database Connection Error: ", error);
 });
 
 
@@ -32,6 +33,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

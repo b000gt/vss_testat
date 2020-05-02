@@ -11,38 +11,18 @@
 </head>
 <body>
     <header>
-        <div class="points">8080<i class="fa fa-heart"></i></div>
+        <div class="points"><span id="points">0</span><i class="fa fa-heart"></i></div>
     </header>
-    <div class="board">
+    <div class="board" id="board">
         <div class="tile add">
             <span class="cost">
-                    <i class="fa fa-plus"></i>
-                    2000
+                <i class="fa fa-plus"></i>
+                <span id="cost"></span>
             </span>
         </div>
-        <div class="tile face">
-            <img src="./images/p1.jpg">
-            <span class="modifier">2</span>
-        </div>
-        <div class="tile face">
-            <img src="./images/p2.jpg">
-            <span class="modifier">4</span>
-        </div>
-        <div class="tile face">
-            <img src="./images/p3.jpg">
-            <span class="modifier">8</span>
-        </div>
-        <div class="tile face">
-            <img src="./images/p4.jpg">
-            <span class="modifier">16</span>
-        </div>
-        <div class="tile face">
-            <img src="./images/p5.jpg">
-            <span class="modifier">32</span>
-        </div>
-        <div class="tile face">
-            <img src="./images/p6.jpg">
-            <span class="modifier">64</span>
+        <div class="tile face" id="face-id--1">
+            <img src="">
+            <span class="modifier"></span>
         </div>
     </div>
 </body>

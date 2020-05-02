@@ -35,6 +35,9 @@ header .points{
     object-fit: cover;
     opacity: 65%;
 }
+#face-id--1{
+    display: none;
+}
 .tile span{
     top: 50%;
     left: 50%;
