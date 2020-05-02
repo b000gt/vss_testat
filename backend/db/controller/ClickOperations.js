@@ -6,7 +6,6 @@ const SEMESTER_COUNT = 1; // since our application only ever allows 1 clicks rep
 async function getClicks() {
     const clicksRepository = typeorm.getConnection().getRepository("total_clicks");
     const clicks = await clicksRepository.findOne({id: SEMESTER_COUNT});
-    console.log(clicks);
     return clicks;
 }
 

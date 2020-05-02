@@ -5,7 +5,6 @@ const clickOperations = require('./ClickOperations');
 async function getFaces() {
     const faceRepository = typeorm.getConnection().getRepository("face");
     const faces = await faceRepository.find();
-    console.log(faces);
     if(faces.length <= 0) {
         throw new Error('No faces found');
     }
@@ -16,7 +15,9 @@ async function getFaces() {
 * faceName = String, faceAmount = int
 */
 async function postFaces(faceName, faceAmount, price) {
-    
+    console.log('name', faceName)
+    console.log('amount', faceAmount)
+    console.log('price', price)
     const faceRepository = typeorm.getConnection().getRepository("face");
     const totalClicks = clickOperations.getClicks();
     if (totalClicks < price) {

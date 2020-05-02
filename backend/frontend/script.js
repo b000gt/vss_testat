@@ -1,8 +1,8 @@
 const clicksUrl = 'http://localhost:8080/clicks';
 const facesUrl = 'http://localhost:8080/faces';
 const imagesUrl = 'images/';
-const costModifier = 10;
-const rewardModifier = 5;
+const costModifier = 9;
+const rewardModifier = 7;
 
 class clickBuffer{
     constructor() {
@@ -12,8 +12,10 @@ class clickBuffer{
         this.clicks += amount;
     }
     async sendClicks() {
-        pushClicks(this.clicks)
-            .then(res => this.clicks = 0);
+        if(this.clicks > 0){
+            pushClicks(this.clicks);
+            this.clicks = 0;
+        }
     }
 }
 const userClickBuffer = new clickBuffer();
@@ -38,11 +40,11 @@ async function pullFaces(){
         .then(res => res.json())
 }
 
-async function pullNewFaceAvailable(){
-    const faces = await pullFaces();
+async function calcNewFaceAvailable(faces){
     const points = parseInt(document.getElementById('points').innerText);
     const nextPrice = Math.pow(costModifier, faces.length);
-    if(nextPrice < points){
+    document.getElementById('next-unlock').innerText = nextPrice;
+    if(nextPrice <= points){
         const nextAmount = Math.pow(rewardModifier, faces.length);
         return {isAvailable: true, price: nextPrice, amount: nextAmount};
     } else{
@@ -50,22 +52,24 @@ async function pullNewFaceAvailable(){
     }
 }
 
-function updateClicks(clicks){
-    if(document.getElementById('points').innerText < clicks.amount) {
+function updateClicks(clicks, hardUpdate = false){
+    if(parseInt(document.getElementById('points').innerText) < parseInt(clicks.amount) ||hardUpdate) {
         document.getElementById('points').innerText = clicks.amount;
     }
 }
 
 function updateNewFaceAvailable(answer){
-    console.log(answer);
     if(answer.isAvailable){
         document.getElementById('add-face').classList.remove('hidden');
+        document.getElementById('cost').innerText = answer.price;
         const inputs = document.getElementsByTagName('form')[0].getElementsByTagName('input');
         for(let inputIndex in inputs){
-            if(answer[inputs[inputIndex]['name']] != null){
-                inputs[inputIndex]['value'] = answer[inputs[inputIndex]];
+            if(answer[inputs[inputIndex]['name']] != undefined){
+                inputs[inputIndex]['value'] = answer[inputs[inputIndex]['name']];
             }
         }
+    } else{
+        document.getElementById('add-face').classList.add('hidden');
     }
 }
 
@@ -82,17 +86,6 @@ function updateFaces(faces){
         document.getElementById('board').append(newFace);
         newFace.addEventListener("click", clickFaceListener);
     }
-}
-
-async function addFace(formBody){
-    await fetch(facesUrl, {
-        method: 'POST',
-        headers:{
-            enctype: 'multiplart/form-data',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formBody)
-    }).then(res => document.getElementsByClassName('overlay')[0].classList.add('hidden'))
 }
 
 function clickFaceListener(){
@@ -125,32 +118,43 @@ function clickAddFaceListener(){
     document.getElementsByClassName('overlay')[0].classList.remove('hidden');
 }
 
-function clickAddFaceSubmitButton(e){
+async function clickAddFaceSubmitButton(e){
     e.preventDefault();
-    const formBody = {};
-    const inputs = document.getElementsByTagName('form')[0].getElementsByTagName('input');
-    for(let elementIndex in inputs){
-        formBody[inputs[elementIndex]['name']] = inputs[elementIndex]['value'];
-    }
-    addFace(formBody);
+    const file = document.querySelector('input[type="file"]');
+    const amount = document.querySelector('input[name="amount"]').getAttribute('value');
+    const price = document.querySelector('input[name="price"]').getAttribute('value');
+    let data = new FormData();
+    console.log(amount);
+    data.append('file', file.files[0]);
+    data.append('amount', amount);
+    data.append('price', price);
+    await fetch(facesUrl, {
+        method: 'POST',
+        body: data
+    }).then(res => {
+        document.getElementsByClassName('overlay')[0].classList.add('hidden');
+        updateEverything(true);
+    })
 }
 
-async function updateEverything(){
+async function updateEverything(hardUpdate = false){
     await userClickBuffer.sendClicks();
     pullClicks()
-        .then(clicks => updateClicks(clicks));
+        .then(clicks => updateClicks(clicks, hardUpdate));
     pullFaces()
-        .then(faces => updateFaces(faces));
-    pullNewFaceAvailable()
-        .then(answer => updateNewFaceAvailable(answer));
+        .then(faces => {
+            updateFaces(faces);
+            calcNewFaceAvailable(faces)
+                .then(answer => updateNewFaceAvailable(answer));
+        });
 }
 
 async function updateInInterval(){
     // setInterval
     // setTimeout
-    setTimeout(async function(){
+    setInterval(async function(){
         updateEverything();
-    }, 1000);
+    }, 2000);
 }
 
 function init(){

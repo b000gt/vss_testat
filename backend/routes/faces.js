@@ -17,16 +17,13 @@ router.get('/', async function(req, res, next) {
     res.send(allFaces);
   } catch(e) {
     res.status(403).send({ message: e.message });
-    console.log(e);
-}}); 
+}});
 
 router.post('/', async function(req, res, next) {
   try { 
     let amount = null;
     let price = null;
     let file = null;
-    console.log(req.body);
-    console.log(req.files);
     if (req.body.amount) {
       amount = parseInt(req.body.amount);
     }
@@ -45,12 +42,12 @@ router.post('/', async function(req, res, next) {
     if (price < 0) {
       throw new Error('Negative numbers are not allowed');
     }
-    console.log(file);
     const newFace = await faceOperations.postFaces(file.name, amount, price);
     file.mv('./frontend/images/' + 'ID-' + newFace.id + '-' + file.name);
     res.send(newFace);
 
   } catch (e) {
+    console.log(e);
     res.status(403).send({ message: e.message });
   }
 });
