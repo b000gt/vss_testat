@@ -27,6 +27,10 @@ router.post('/', async function(req, res, next) {
     let name = null;
     let amount = null;
     let price = null;
+    let file = null;
+    console.log(req.body);
+    console.log(req.files);
+
     if (req.body.name) {
       name = req.body.name.toString();
     }
@@ -36,13 +40,20 @@ router.post('/', async function(req, res, next) {
     if (req.body.price) {
       price = parseInt(req.body.price);
     }
-    if (!name || !amount || !price) {
+    if (req.files.file){
+      file = req.files.file;
+    }
+    if (!name || !amount || !price || !req.files) {
       throw new Error('No Face, Price or Amount given');
+    }
+    if (!file.mimetype.toString().includes('image')) {
+      throw new Error('Wrong File Type');
     }
     if (price < 0) {
       throw new Error('Negative numbers are not allowed');
     }
     const newFace = await faceOperations.postFaces(name, amount, price);
+    file.mv('./frontend/images/' + name);
     res.send(newFace);
 
   } catch (e) {
