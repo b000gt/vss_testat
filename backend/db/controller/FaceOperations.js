@@ -1,9 +1,10 @@
 const typeorm = require('typeorm');
 const fs = require('fs');
 const clickOperations = require('./ClickOperations');
+const Face = require('../entity/Face');
 
 async function getFaces() {
-    const faceRepository = typeorm.getConnection().getRepository("face");
+    const faceRepository = typeorm.getConnection().getRepository(new typeorm.EntitySchema(Face));
     const faces = await faceRepository.find();
     if(faces.length <= 0) {
         throw new Error('No faces found');

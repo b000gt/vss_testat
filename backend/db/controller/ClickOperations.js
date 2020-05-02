@@ -1,10 +1,10 @@
 const typeorm = require('typeorm');
 const fs = require('fs');
 const SEMESTER_COUNT = 1; // since our application only ever allows 1 clicks repository per semester, we leave a constat value here
-
+const Click = require('../entity/Clicks');
 
 async function getClicks() {
-    const clicksRepository = typeorm.getConnection().getRepository("total_clicks");
+    const clicksRepository = typeorm.getConnection().getRepository(new typeorm.EntitySchema(Click));
     const clicks = await clicksRepository.findOne({id: SEMESTER_COUNT});
     return clicks;
 }
