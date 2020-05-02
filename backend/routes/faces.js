@@ -3,11 +3,6 @@ const faceOperations = require('../db/controller/FaceOperations');
 
 const router = express.Router();
 
-
-/* Idea: only the amount will be saved on the face repository, there will be a matching with name and the specified amount,
-*  hence why name and amount are unique. Then in frontend we match db amount with image given.
-*/
-
 /* face routes */
 /* gets all faces */
 
@@ -25,8 +20,6 @@ router.post('/', async function(req, res, next) {
     let amount = null;
     let price = null;
     let file = null;
-    console.log(req.body);
-    console.log(req.files);
     if (req.body.amount) {
       amount = parseInt(req.body.amount);
     }
@@ -45,13 +38,13 @@ router.post('/', async function(req, res, next) {
     if (price < 0) {
       throw new Error('Negative numbers are not allowed');
     }
-    console.log(file);
     const newFace = await faceOperations.postFaces(file.name, amount, price);
     file.mv('./frontend/images/' + 'ID-' + newFace.id + '-' + file.name);
     res.send(newFace);
 
   } catch (e) {
     res.status(403).send({ message: e.message });
+    console.log(e);
   }
 });
 

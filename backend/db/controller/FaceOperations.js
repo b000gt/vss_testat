@@ -5,7 +5,6 @@ const clickOperations = require('./ClickOperations');
 async function getFaces() {
     const faceRepository = typeorm.getConnection().getRepository("face");
     const faces = await faceRepository.find();
-    console.log(faces);
     if(faces.length <= 0) {
         throw new Error('No faces found');
     }
