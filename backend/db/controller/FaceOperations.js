@@ -16,7 +16,9 @@ async function getFaces() {
 * faceName = String, faceAmount = int
 */
 async function postFaces(faceName, faceAmount, price) {
-    
+    console.log('name', faceName)
+    console.log('amount', faceAmount)
+    console.log('price', price)
     const faceRepository = typeorm.getConnection().getRepository("face");
     const totalClicks = clickOperations.getClicks();
     if (totalClicks < price) {

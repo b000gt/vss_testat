@@ -12,11 +12,13 @@
 <body>
     <header>
         <div class="points"><span id="points">0</span><i class="fa fa-heart"></i></div>
+        <div class="next-unlock">Next unlocks by <span id="next-unlock">0</span> Points</div>
     </header>
     <div class="board" id="board">
         <div class="tile add hidden" id="add-face">
             <span class="cost">
                 <i class="fa fa-plus"></i>
+                <br>
                 <span id="cost"></span>
             </span>
         </div>
@@ -25,20 +27,13 @@
             <span class="modifier"></span>
         </div>
     </div>
-    <div class="overlay">
+    <div class="overlay hidden">
         <form method="post" action="http://localhost:8080/faces" enctype="multipart/form-data">
             <label>Upload Your Image
                 <input type="file" name="file" />
             </label>
-            <br>
-            <label>Amount
-                <input type="number" name="amount" value="100" disabled/>
-            </label>
-            <br>
-            <label>Price
-                <input type="number" name="price" value="1000" disabled/>
-            </label>
-            <br>
+            <input type="hidden" name="amount" value=""/>
+            <input type="hidden" name="price" value=""/>
             <button type="submit">Send</button>
         </form>
     </div>

@@ -12,8 +12,7 @@ router.get('/', async function(req, res, next) {
     res.send(allFaces);
   } catch(e) {
     res.status(403).send({ message: e.message });
-    console.log(e);
-}}); 
+}});
 
 router.post('/', async function(req, res, next) {
   try { 
@@ -43,11 +42,10 @@ router.post('/', async function(req, res, next) {
     res.send(newFace);
 
   } catch (e) {
+    console.log(e);
     res.status(403).send({ message: e.message });
     console.log(e);
   }
 });
-
-
 
 module.exports = router;

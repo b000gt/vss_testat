@@ -14,6 +14,13 @@ header .points{
     width: max-content;
     margin: auto;
 }
+header .next-unlock{
+    color: darkgrey;
+    font-size: 1.5rem;
+}
+header #next-unlock{
+    color: black;
+}
 .board{
     display: flex;
     flex-wrap: wrap-reverse;
