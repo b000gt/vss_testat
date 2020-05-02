@@ -1,7 +1,8 @@
 const clicksUrl = 'http://localhost:8080/clicks';
 const facesUrl = 'http://localhost:8080/faces';
 const imagesUrl = 'images/';
-
+const costModifier = 10;
+const rewardModifier = 5;
 
 class clickBuffer{
     constructor() {
@@ -38,9 +39,15 @@ async function pullFaces(){
 }
 
 async function pullNewFaceAvailable(){
-    return await fetch(facesUrl + '/canBuy')
-        .then(res => res.json())
-        .catch(e => {console.log(e)})
+    const faces = await pullFaces();
+    const points = parseInt(document.getElementById('points').innerText);
+    const nextPrice = Math.pow(costModifier, faces.length);
+    if(nextPrice < points){
+        const nextAmount = Math.pow(rewardModifier, faces.length);
+        return {isAvailable: true, price: nextPrice, amount: nextAmount};
+    } else{
+        return false;
+    }
 }
 
 function updateClicks(clicks){
@@ -53,6 +60,12 @@ function updateNewFaceAvailable(answer){
     console.log(answer);
     if(answer.isAvailable){
         document.getElementById('add-face').classList.remove('hidden');
+        const inputs = document.getElementsByTagName('form')[0].getElementsByTagName('input');
+        for(let inputIndex in inputs){
+            if(answer[inputs[inputIndex]['name']] != null){
+                inputs[inputIndex]['value'] = answer[inputs[inputIndex]];
+            }
+        }
     }
 }
 
