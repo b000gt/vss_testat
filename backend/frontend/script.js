@@ -37,9 +37,22 @@ async function pullFaces(){
         .then(res => res.json())
 }
 
+async function pullNewFaceAvailable(){
+    return await fetch(facesUrl + '/canBuy')
+        .then(res => res.json())
+        .catch(e => {console.log(e)})
+}
+
 function updateClicks(clicks){
     if(document.getElementById('points').innerText < clicks.amount) {
         document.getElementById('points').innerText = clicks.amount;
+    }
+}
+
+function updateNewFaceAvailable(answer){
+    console.log(answer);
+    if(answer.isAvailable){
+        document.getElementById('add-face').classList.remove('hidden');
     }
 }
 
@@ -56,6 +69,17 @@ function updateFaces(faces){
         document.getElementById('board').append(newFace);
         newFace.addEventListener("click", clickFaceListener);
     }
+}
+
+async function addFace(formBody){
+    await fetch(facesUrl, {
+        method: 'POST',
+        headers:{
+            enctype: 'multiplart/form-data',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formBody)
+    }).then(res => document.getElementsByClassName('overlay')[0].classList.add('hidden'))
 }
 
 function clickFaceListener(){
@@ -84,19 +108,45 @@ function clickFaceListener(){
         )
 }
 
+function clickAddFaceListener(){
+    document.getElementsByClassName('overlay')[0].classList.remove('hidden');
+}
+
+function clickAddFaceSubmitButton(e){
+    e.preventDefault();
+    const formBody = {};
+    const inputs = document.getElementsByTagName('form')[0].getElementsByTagName('input');
+    for(let elementIndex in inputs){
+        formBody[inputs[elementIndex]['name']] = inputs[elementIndex]['value'];
+    }
+    addFace(formBody);
+}
+
+async function updateEverything(){
+    await userClickBuffer.sendClicks();
+    pullClicks()
+        .then(clicks => updateClicks(clicks));
+    pullFaces()
+        .then(faces => updateFaces(faces));
+    pullNewFaceAvailable()
+        .then(answer => updateNewFaceAvailable(answer));
+}
+
 async function updateInInterval(){
     // setInterval
     // setTimeout
     setTimeout(async function(){
-        await userClickBuffer.sendClicks();
-        pullClicks()
-            .then(clicks => updateClicks(clicks));
-        pullFaces()
-            .then(faces => updateFaces(faces));
+        updateEverything();
     }, 1000);
 }
 
 function init(){
+    updateEverything();
     updateInInterval();
+    document.getElementById('add-face')
+        .addEventListener('click', clickAddFaceListener);
+    document.getElementsByTagName('form')[0]
+        .getElementsByTagName('button')[0]
+        .addEventListener('click', clickAddFaceSubmitButton);
 }
 init();
