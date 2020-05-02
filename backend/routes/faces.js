@@ -9,6 +9,7 @@ const router = express.Router();
 */
 
 /* face routes */
+/* gets all faces */
 
 router.get('/', async function(req, res, next) {
   try {
@@ -17,23 +18,15 @@ router.get('/', async function(req, res, next) {
   } catch(e) {
     res.status(403).send({ message: e.message });
     console.log(e);
-}
-  
-  
-});
+}}); 
 
 router.post('/', async function(req, res, next) {
   try { 
-    let name = null;
     let amount = null;
     let price = null;
     let file = null;
     console.log(req.body);
     console.log(req.files);
-
-    if (req.body.name) {
-      name = req.body.name.toString();
-    }
     if (req.body.amount) {
       amount = parseInt(req.body.amount);
     }
@@ -43,7 +36,7 @@ router.post('/', async function(req, res, next) {
     if (req.files.file){
       file = req.files.file;
     }
-    if (!name || !amount || !price || !req.files) {
+    if (!amount || !price || !req.files) {
       throw new Error('No Face, Price or Amount given');
     }
     if (!file.mimetype.toString().includes('image')) {
@@ -52,8 +45,9 @@ router.post('/', async function(req, res, next) {
     if (price < 0) {
       throw new Error('Negative numbers are not allowed');
     }
-    const newFace = await faceOperations.postFaces(name, amount, price);
-    file.mv('./frontend/images/' + name);
+    console.log(file);
+    const newFace = await faceOperations.postFaces(file.name, amount, price);
+    file.mv('./frontend/images/' + 'ID-' + newFace.id + '-' + file.name);
     res.send(newFace);
 
   } catch (e) {
