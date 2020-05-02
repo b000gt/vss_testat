@@ -10,7 +10,6 @@ module.exports = {
             type: "varchar",
             length: 255,
             nullable: false,
-            unique: true,
         },
         amount: {
             type: "int",

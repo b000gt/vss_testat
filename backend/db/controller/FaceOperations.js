@@ -25,7 +25,10 @@ async function postFaces(faceName, faceAmount, price) {
     const newFace = faceRepository.create();
     newFace.name = faceName;
     newFace.amount = faceAmount;
-    const result = await faceRepository.save(newFace);
+    const createdFace = await faceRepository.save(newFace);
+    createdFace.name = 'ID-' + createdFace.id + '-' + createdFace.name;
+    await faceRepository.update(createdFace.id, { name: createdFace.name });
+    const updatedNameFace = await faceRepository.findOne({id: createdFace.id});
     fs.appendFile('textprotocol.txt', '[' + new Date().toUTCString() + '] Add new face ' + faceName + ' with value ' + faceAmount + ', \n', (err) => {
         if (err) throw err;
     });
@@ -33,7 +36,7 @@ async function postFaces(faceName, faceAmount, price) {
     fs.appendFile('textprotocol.txt', '[' + new Date().toUTCString() + '] Subtracted from total clicks, \n', (err) => {
         if (err) throw err;
     });
-    return result;
+    return updatedNameFace;
 
 }
 
