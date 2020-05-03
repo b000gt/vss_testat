@@ -62,6 +62,9 @@ header #next-unlock{
     order: 999999999;
     background: rgb(223, 223, 223);
 }
+#cost {
+    margin-top: 2.5rem;
+}
 .reaction{
     position: absolute;
     top: 30%;
