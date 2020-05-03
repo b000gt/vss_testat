@@ -24,8 +24,8 @@ typeorm.createConnection({
   database: "happyface",
   synchronize: true,
   entities: [
-    new EntitySchema(require("./db/entity/Face.js")),
-    new EntitySchema(require("./db/entity/Clicks.js"))
+    new EntitySchema(require("./db/entity/Face")),
+    new EntitySchema(require("./db/entity/Clicks"))
   ]
 }).then(console.log('Done Loading things')).catch(function(error) {
   console.log("Database Connection Error: ", error);

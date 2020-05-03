@@ -38,7 +38,7 @@ router.post('/', async function(req, res, next) {
       throw new Error('Negative numbers are not allowed');
     }
     const newFace = await faceOperations.postFaces(file.name, amount, price);
-    file.mv('./frontend/images/' + 'ID-' + newFace.id + '-' + file.name);
+    file.mv('../images/' + 'ID-' + newFace.id + '-' + file.name);
     res.send(newFace);
 
   } catch (e) {
