@@ -1,6 +1,13 @@
 # vss_testat
-Backend: http://localhost:8080
 
-Frontend: http://localhost:3000
+*by Felix Kubli, Patrick Kaufmann & Marc Scherrer*
 
-in front- und backend: npm install
+## Installation
+
+Grundsätzlich läuft alles über docker-compose.
+``docker-compose up``
+Im ``images`` Ordner finden Sie Beispielbilder. ``marc.jpg`` wird schon verwendet, die anderen können Sie zum hochladen benutzen.
+
+## Erklärung
+
+Die Verteiltheit des Systems ist nur mässig schön, da in einem Docker Container 4 Instanzen erstellt werden, anstatt 4 Docker Container. Dies ist dadurch entstanden weil wir die Dockerisation erst sehr spät im Projekt gemacht haben und vorher alles auf einer VM getestet haben.
