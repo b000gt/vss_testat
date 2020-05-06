@@ -115,7 +115,11 @@ function clickFaceListener(){
 }
 
 function clickAddFaceListener(){
-    document.getElementsByClassName('overlay')[0].classList.remove('hidden');
+    const overlay = document.getElementsByClassName('overlay')[0];
+    overlay.classList.remove('hidden');
+    document.getElementById('cancel').addEventListener('click', function() {
+        overlay.classList.add('hidden');
+    })
 }
 
 async function clickAddFaceSubmitButton(e){
@@ -134,6 +138,14 @@ async function clickAddFaceSubmitButton(e){
     }).then(res => {
         document.getElementsByClassName('overlay')[0].classList.add('hidden');
         updateEverything(true);
+    })
+}
+
+function closeOverlay(e) {
+    const overlay = document.getElementsByClassName('overlay')[0];
+    overlay.addEventListener('click', function() {
+        console.log('hit');
+        overlay.classList.add('hidden');
     })
 }
 

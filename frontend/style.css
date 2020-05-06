@@ -103,15 +103,18 @@ header #next-unlock{
     left: 0;
     height: 100%;
     width: 100%;
-    background: darkgrey;
+    background: rgb(169, 169, 169, .5);
 }
 .overlay form{
-    width: 50%;
-    height: 50%;
-    min-width: 800px;
+    width: 40%;
+    height: 30%;
+    min-width: 500px;
     min-height: 100px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: darkgray;
+    padding: 2.5rem;
+    border-radius: 20px;
 }

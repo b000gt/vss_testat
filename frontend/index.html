@@ -28,14 +28,19 @@
         </div>
     </div>
     <div class="overlay hidden">
-        <form method="post" action="http://localhost:8080/faces" enctype="multipart/form-data">
-            <label>Upload Your Image
-                <input type="file" name="file" />
-            </label>
-            <input type="hidden" name="amount" value=""/>
-            <input type="hidden" name="price" value=""/>
-            <button type="submit">Send</button>
-        </form>
+        <div class="overlay-form">
+            <form method="post" action="http://localhost:8080/faces" enctype="multipart/form-data">
+                <label>Upload Your Image
+                    <br>
+                    <input type="file" name="file" />
+                </label>
+                <br>
+                <input type="hidden" name="amount" value=""/>
+                <input type="hidden" name="price" value=""/>
+                <button type="submit">Send</button>
+                <button type="reset" id="cancel">Cancel</button>
+            </form>
+        </div>
     </div>
 </body>
 <script type="text/javascript" src="/script.js"></script>
