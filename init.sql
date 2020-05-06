@@ -12,4 +12,4 @@ CREATE TABLE face(
 );
 
 INSERT INTO total_clicks (amount) VALUES (0);
-INSERT INTO face (amount, name) VALUES (1, 'marc.jpg');
+INSERT INTO face (amount, name) VALUES (1, 'marc.jpg'), (7, 'patrick.jpg'), (49, 'felix.jpg');

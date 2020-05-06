@@ -1,8 +1,8 @@
 # vss_testat
 
-*by Felix Kubli, Patrick Kaufmann & Marc Scherrer*
+*by [Felix Kubli](mailto:f1kubli@hsr.ch), [Patrick Kaufmann](mailto:pkaufban@hsr.ch) & [Marc Scherrer](mailto:mscherre@hsr.ch)*
 
-[github](https://github.com/b000gt/vss_testat)
+[Mail an alle](mailto:f1kubli@hsr.ch,pkaufban@hsr.ch,mscherre@hsr.ch)
 
 ## Installation
 
@@ -13,13 +13,15 @@ docker-compose up -d
 ```
 
 Grundsätzlich läuft alles über ``docker-compose``.
-Im ``images/examples`` Ordner finden Sie Beispielbilder. ``marc.jpg`` wird schon verwendet, die anderen können Sie zum hochladen benutzen.
-
-Bilder sind aus [Unsplash](https://unsplash.com/s/photos/face)
+Man muss schauen dass docker-compose erst die Datenbank instanziert und danach erst die App laufen lässt. mit ``depends_on`` funktioniert das nicht richtig.
 
 ## Benutzung
 
 Anmeldung erfolgt mit **username** ``hsr-user`` und **password** ``123456789``
+
+Im ``images/examples`` Ordner finden Sie Beispielbilder. ``marc.jpg`` wird schon verwendet, die anderen können Sie zum hochladen benutzen.
+
+Bilder sind aus [Unsplash](https://unsplash.com/s/photos/face)
 
 ## Erklärung
 
