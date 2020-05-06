@@ -13,13 +13,15 @@ docker-compose up -d
 ```
 
 Grundsätzlich läuft alles über ``docker-compose``.
-Im ``images/examples`` Ordner finden Sie Beispielbilder. ``marc.jpg`` wird schon verwendet, die anderen können Sie zum hochladen benutzen.
-
-Bilder sind aus [Unsplash](https://unsplash.com/s/photos/face)
+Man muss schauen dass docker-compose erst die Datenbank instanziert und danach erst die App laufen lässt. mit ``depends_on`` funktioniert das nicht richtig.
 
 ## Benutzung
 
 Anmeldung erfolgt mit **username** ``hsr-user`` und **password** ``123456789``
+
+Im ``images/examples`` Ordner finden Sie Beispielbilder. ``marc.jpg`` wird schon verwendet, die anderen können Sie zum hochladen benutzen.
+
+Bilder sind aus [Unsplash](https://unsplash.com/s/photos/face)
 
 ## Erklärung
 
