@@ -1,8 +1,8 @@
 # vss_testat
 
-*by Felix Kubli, Patrick Kaufmann & Marc Scherrer*
+*by [Felix Kubli](mailto:f1kubli@hsr.ch), [Patrick Kaufmann](mailto:pkaufban@hsr.ch) & [Marc Scherrer](mailto:mscherre@hsr.ch)*
 
-[github](https://github.com/b000gt/vss_testat)
+[Mail an alle](mailto:f1kubli@hsr.ch,pkaufban@hsr.ch,mscherre@hsr.ch)
 
 ## Installation
 
