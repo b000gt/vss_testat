@@ -25,7 +25,7 @@ Anmeldung erfolgt mit **username** ``hsr-user`` und **password** ``123456789``
 
 Über ``docker-compose.yml`` werden 3 Docker Images erstellt.
 
-![deployment](deployment_diagram.PNG)
+![deployment](deployment_diagram.png)
 
 ![idee](capture.PNG)
 
