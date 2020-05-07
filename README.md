@@ -9,27 +9,44 @@
 ```bash
 git clone https://github.com/b000gt/vss_testat
 cd vss_testat
-docker-compose up -d
+docker-compose up
 ```
 
 Grundsätzlich läuft alles über ``docker-compose``.
-Man muss schauen dass docker-compose erst die Datenbank instanziert und danach erst die App laufen lässt. mit ``depends_on`` funktioniert das nicht richtig.
+**WICHTIG**:
+posgres muss vor backend bereit sein
+
+![startup](./compose_start.PNG)
+
+
 
 ## Benutzung
 
-Anmeldung erfolgt mit **username** ``hsr-user`` und **password** ``123456789``
+Läust auf ``localhost`` bzw ``localhost:80``.
+
+Anmeldung erfolgt mit **username** ``hsr-user`` und **password** ``123456789``.
 
 Im ``images/examples`` Ordner finden Sie Beispielbilder. ``marc.jpg`` wird schon verwendet, die anderen können Sie zum hochladen benutzen.
 
 Bilder sind aus [Unsplash](https://unsplash.com/s/photos/face)
 
+Ein **Click** auf ein Bild (**Face**) gibt eine gewisse Anzahl an **Herzen** (wie eine Währung): z.b _1, 7, 49_.
+Hat man eine gewisse Anzahl Herzen gesammelt kann man sich ein neues Face kaufen, für einen **Cost** (Betrag). Dieses neue Face gibt dann mehr Herzen: z.b _343_.
+
+#### Formeln
+
+```latex
+cost = 9^{faces.count}
+reward = 7^{faces.count}
+```
+
 ## Erklärung
 
 Über ``docker-compose.yml`` werden 3 Docker Images erstellt.
 
-![deployment](deployment_diagram.png)
+![idee](architektur.PNG)
 
-![idee](capture.PNG)
+![deployment](deployment_diagram.png)
 
 ### nginx:1.17
 
