@@ -44,7 +44,7 @@ reward = 7^{faces.count}
 
 Über ``docker-compose.yml`` werden 3 Docker Images erstellt.
 
-![idee](architektur.PNG)
+![idee](architektur.png)
 
 ![deployment](deployment_diagram.png)
 
