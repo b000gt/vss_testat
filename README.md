@@ -1,8 +1,8 @@
 # vss_testat
 
-*by [Felix Kubli](mailto:f1kubli@hsr.ch), [Patrick Kaufmann](mailto:pkaufban@hsr.ch) & [Marc Scherrer](mailto:mscherre@hsr.ch)*
+*by [Felix Kubli](mailto:f1kubli@hsr.ch), [Patrick Kaufmann](mailto:pkaufman@hsr.ch) & [Marc Scherrer](mailto:mscherre@hsr.ch)*
 
-[Mail an alle](mailto:f1kubli@hsr.ch,pkaufban@hsr.ch,mscherre@hsr.ch)
+[Mail an alle](mailto:f1kubli@hsr.ch,pkaufman@hsr.ch,mscherre@hsr.ch)
 
 ## Installation
 
