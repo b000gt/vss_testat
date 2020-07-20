@@ -19,7 +19,7 @@
     "express-fileupload": "^1.1.7-alpha.3",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "morgan": "^1.9.1",
     "pg": "^7.18.2",
     "typeorm": "^0.2.24"
